@@ -12,9 +12,6 @@ public class StrutturaSistema implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @pre : ao != null
-     */
 	public static void aggiuntaOperatoriPreimpostati(AnagraficaOperatori ao)
 	{
 		Operatore primo = new Operatore("Stefano", "Metelli", "ste", "161095");
@@ -29,10 +26,7 @@ public class StrutturaSistema implements Serializable
 		ao.getElenco().add(quarto);
 		ao.getElenco().add(quinto);
 	}
-	
-	/** 
-	 * @pre: arc != null
-     */
+
 	public static void creazioneStrutturaArchivioLibri(Archivio arc)
 	{
 		final int DURATA_PRESTITO_L = 30;
@@ -87,9 +81,6 @@ public class StrutturaSistema implements Serializable
 	    s5.aggiungiRisorsa(l6);
 	}
 	
-	/**
-	 * @pre: arc != null
-	 */
 	public static void creazioneStrutturaArchivioFilm(Archivio arc)
 	{
 		final int DURATA_PRESTITO_F = 15;
@@ -150,6 +141,5 @@ public class StrutturaSistema implements Serializable
 		s9.aggiungiRisorsa(f5);
 		s10.aggiungiRisorsa(f3);
 		s10.aggiungiRisorsa(f6);
-	}
-	
+	}	
 }

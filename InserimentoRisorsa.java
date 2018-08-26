@@ -37,7 +37,6 @@ public class InserimentoRisorsa implements Serializable
     public static final int MAX_LICENZE_FILM = 20;
     public static final int MIN_ANNOP = 1900;
 	
-    
 	public static Libro inserisciLibro()
     {
     	    String t = InputDati.leggiStringaNonVuota(INS_TITOLO);
@@ -97,6 +96,5 @@ public class InserimentoRisorsa implements Serializable
     	    Film f = new Film(t, nl, g, ap, l, new Persona(nomeRegista, cognomeRegista), a, d);
     	    
     	    return f;
-    }
-	
+    }	
 }

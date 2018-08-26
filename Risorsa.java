@@ -15,7 +15,6 @@ public abstract class Risorsa implements Serializable
 	private int annoPub;
 	private String lingua;
     
-
     public Risorsa(String t, int lic, ArrayList <Persona> a, String g, int ap, String l)
     {
     	 this.titolo = t;
@@ -67,6 +66,5 @@ public abstract class Risorsa implements Serializable
     	return false;
     }
     
-    public abstract String toString();
-    
+    public abstract String toString();   
 }

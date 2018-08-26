@@ -2,11 +2,11 @@ package dominio.parte2.punto5;
 
 import java.util.ArrayList;
 
-public class RicercaPerArtistaStrategy implements IRicercaStrategy
+public class RicercaPerTitoloStrategy implements IRicercaStrategy
 {
 	private String s;
 	
-	public RicercaPerArtistaStrategy(String s)
+	public RicercaPerTitoloStrategy(String s)
 	{
 		this.s = s;
 	}
@@ -18,9 +18,9 @@ public class RicercaPerArtistaStrategy implements IRicercaStrategy
 	   	 for(int i = 0; i < elencoris.size(); i++)
 	   	 {
 	   	     Risorsa ris = elencoris.get(i);
-	   
-	   	     if(ris.verificaPresenzaArtista(s))
-					risorseCercate.add(ris);
+	   	    	    
+	   	     if(ris.getTitolo().toLowerCase().indexOf((s).toLowerCase()) > -1)
+	  	    	  risorseCercate.add(ris);
 	   	 }
 	   	    	                    
 	   	 return risorseCercate;

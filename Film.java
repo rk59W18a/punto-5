@@ -13,11 +13,7 @@ public class Film extends Risorsa implements Serializable
     private int durataInMinuti;
     
     public static final String DESCRIZIONE_FILM = "Titolo: %s\n\t\tRegista: %s\n\t\tAttore/i: %s\n\t\tGenere: %s\n\t\tLingua: %s\n\t\tDurata (in minuti): %d\n\t\tAnno di uscita: %d\n\t\tNumero licenze: %d\n";
-    
-    /** 
-     * @pre: a != null
-     * @post: attori != null
-     */
+   
     public Film(String titolo, int licenze, String genere, int annoPub, String lingua, Persona reg, ArrayList <Persona> a, int dm)
     {
     	 super(titolo, licenze, a, genere, annoPub, lingua);
@@ -34,10 +30,7 @@ public class Film extends Risorsa implements Serializable
     {
     	 return durataInMinuti;
     }
-       
-    /**
-     * @pre: attori != null
-     */
+   
     public String toString()
     {
         StringBuffer ris = new StringBuffer();
