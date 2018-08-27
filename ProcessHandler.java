@@ -1,10 +1,7 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
-
-
 import java.util.ArrayList;
-
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.IRicercaStrategy;
 import dominio.parte2.punto5.RicercaPerAnnoPubblicazioneStrategy;
@@ -15,6 +12,7 @@ import dominio.parte2.punto5.RicercaPerRegistaStrategy;
 import dominio.parte2.punto5.RicercaPerTitoloStrategy;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
+import dominio.parte2.punto5.Contenitore;
 import logica.parte2.punto5.Archivio;
 import logica.parte2.punto5.ArchivioPrestiti;
 import logica.parte2.punto5.Utente;
@@ -174,7 +172,7 @@ public abstract class ProcessHandler implements Serializable
 		return ris.toString();
    }
    
-   public String stampaElencoRisorse(Categoria c)
+   public String stampaElencoRisorse(Contenitore c)
    {
       StringBuffer ris = new StringBuffer();
  	   

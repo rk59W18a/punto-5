@@ -36,12 +36,12 @@ public class ArchivioStorico implements Serializable
     
     public AnagraficaFruitori getRinnovoIscrizioniFruitoriStorici()
     {
-    	    return rinnovoIscrizioniFruitoriStorici;
+    	return rinnovoIscrizioniFruitoriStorici;
     }
     
     public AnagraficaFruitori getDecadenzeFruitoriStoriche()
     {
-    	    return decadenzeFruitoriStoriche;
+    	return decadenzeFruitoriStoriche;
     }
 	
     public ArchivioPrestiti getPrestitiStorici()

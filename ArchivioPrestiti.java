@@ -112,4 +112,16 @@ public class ArchivioPrestiti implements Serializable
 	    else
 	         return false;
 	}
+	
+	public String toString()
+	{
+		StringBuffer s = new StringBuffer();
+		
+		for(int i = 0; i < elencoPrestiti.size(); i++)
+		{
+			s.append(i+1 + ")" + elencoPrestiti.get(i).toString() + "\n");
+		}
+		
+		return s.toString();
+	}
 }
