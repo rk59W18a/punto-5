@@ -3,7 +3,6 @@ package interazione.parte2.punto5;
 import java.io.Serializable;
 
 import java.time.DateTimeException;
-//import java.time.LocalDate;
 import java.time.Period;
 
 import dominio.parte2.punto5.Categoria;

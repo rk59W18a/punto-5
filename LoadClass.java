@@ -83,14 +83,8 @@ public class LoadClass
 	   return rd;
 	}
 	    
-	public void salva(ProcessOperatoreHandler process) 
+	public void salva() 
 	{	
-	   arc = process.getArchivio();
-	   ap = process.getArchivioPrestiti();
-	   af = process.getAnagraficaFruitori();
-	   ao = process.getAnagraficaOperatori();
-	   as = process.getArchivioStorico();
-	   
 	   System.out.println(Costanti.MSG_SALVA);
 	   rd = new RaccoltaDati(af, ao, arc, ap, as);
 	   ServizioFile.salvaSingoloOggetto(gestoreRisorse, rd); 

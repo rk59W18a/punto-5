@@ -2,8 +2,6 @@ package interazione.parte2.punto5;
 
 import java.io.Serializable;
 
-//import java.time.LocalDate;
-
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
@@ -263,17 +261,5 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
   	    
   	    return s2;
      }    
-     
-     public AnagraficaFruitori getAnagraficaFruitori() {
-    	 return af;
-     }
-     
-     public AnagraficaOperatori getAnagraficaOperatori() {
-    	 return ao;
-     }
-     
-     public ArchivioStorico getArchivioStorico() {
-    	 return as;
-     }
      
 }

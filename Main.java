@@ -14,7 +14,7 @@ public class Main
 		MenuHandler gestore = new MenuHandler();
 		gestore.logicaMenu(processOperatore,processFruitore);
 
-		LoadClass.getinstance().salva(processOperatore);
+		LoadClass.getinstance().salva();
 	}
 	
 }
