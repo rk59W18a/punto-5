@@ -1,23 +1,19 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
-
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
 import logica.parte2.punto5.AnagraficaFruitori;
-import logica.parte2.punto5.Archivio;
-import logica.parte2.punto5.ArchivioPrestiti;
 import logica.parte2.punto5.ArchivioStorico;
 import logica.parte2.punto5.Fruitore;
 import logica.parte2.punto5.Prestito;
 import logica.parte2.punto5.Utente;
-import utility_2.Costanti;
-import utility_2.InputDati;
+import utility.parte2.Costanti;
+import utility.parte2.InputDati;
 
 public class ProcessFruitoreHandler extends ProcessHandler implements Serializable
 {
@@ -26,11 +22,11 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
 	private AnagraficaFruitori af;
     private ArchivioStorico as;
     
-    public ProcessFruitoreHandler(Archivio arc, ArchivioPrestiti ap, AnagraficaFruitori af, ArchivioStorico as)
+    public ProcessFruitoreHandler(RaccoltaDati rd)
     {
-    	super(arc, ap);
-    	this.af = af;
-    	this.as = as;
+    	super(rd);
+    	this.af = rd.getAnagraficaFruitori();
+    	this.as = rd.getArchivioStorico();
     }
   
 	public void iscrizione()

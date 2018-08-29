@@ -2,7 +2,6 @@ package dominio.parte2.punto5;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import logica.parte2.punto5.Persona;
 
 public class Libro extends Risorsa implements Serializable
 {

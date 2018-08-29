@@ -1,9 +1,8 @@
 package interazione.parte2.punto5;
 
 import java.io.File;
-
 import logica.parte2.punto5.*;
-import utility_2.*;
+import utility.parte2.*;
 
 public class LoadClass 
 {
@@ -28,6 +27,11 @@ public class LoadClass
 		 }
 		 return instance;
 	 }
+	 
+	 public RaccoltaDati getRaccoltaDati()
+     {
+		   return rd;
+     }
 		
 	 public void inizializza() 
 	 {
@@ -71,37 +75,14 @@ public class LoadClass
 			ap = new ArchivioPrestiti();
 			as = new ArchivioStorico();
 			
+			rd = new RaccoltaDati(af, ao, arc, ap, as);
+			
 			StrutturaSistema.aggiuntaOperatoriPreimpostati(ao);
 			StrutturaSistema.creazioneStrutturaArchivioLibri(arc);
 			StrutturaSistema.creazioneStrutturaArchivioFilm(arc);
 		}
 	}
-	    
-	public AnagraficaFruitori getAnagraficaFruitori()
-	{
-	   return af;
-	}
-	    
-    public AnagraficaOperatori getAnagraficaOperatori()
-	{
-	   return ao;
-    }
-	    
-    public Archivio getArchivio()
-	{
-	   return arc;
-	}
-	    
-	public ArchivioPrestiti getArchivioPrestiti()
-	{
-       return ap;
-	}
-	    
-	public ArchivioStorico getArchivioStorico()
-	{
-	   return as;
-	}
-	    
+	        
 	public void salva() 
 	{	
 	   System.out.println(Costanti.MSG_SALVA);

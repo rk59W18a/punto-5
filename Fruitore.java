@@ -1,11 +1,11 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import utility.parte2.Data;
 
 public class Fruitore extends Utente implements Serializable
 {
@@ -56,9 +56,9 @@ public class Fruitore extends Utente implements Serializable
 		 {
 			  LocalDate ld = dataDiScadenza.minusDays(DIECI_GIORNI);
 				
-		      if((LocalDate.now().equals(ld)) || (LocalDate.now().isAfter(ld))) 
+			  if((Data.verificaDataCoincidente(ld)) || (Data.verificaDataSuccessiva(ld))) 
 			  {
-				 setDataDiScadenza(dataDiScadenza.plusYears(Fruitore.TERMINE_SCADENZA));
+				 setDataDiScadenza(Data.aumentaNumeroAnni(dataDiScadenza, TERMINE_SCADENZA));
 				 return true;
 			  }
 		 }

@@ -1,11 +1,10 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import dominio.parte2.punto5.*;
+import utility.parte2.Data;
 
 public class Prestito implements Serializable
 {
@@ -79,19 +78,19 @@ public class Prestito implements Serializable
 	
     public boolean prorogaPrestito()
     {
-        if(prorogaNonEffettuata)
+    	if(prorogaNonEffettuata)
    	    {
-        	    if((LocalDate.now().isBefore(dataDiScadenzaPrestito)))
-   	 		    {
-       	 	    	LocalDate ld2 = dataDiScadenzaPrestito.minusDays(categoriaAssociata.getNumeroGiorniRichiestaProroga());
+        	if(Data.verificaDataPrecedente(dataDiScadenzaPrestito))
+   	 		{
+       	 	   LocalDate ld2 = Data.diminuisciNumeroGiorni(dataDiScadenzaPrestito, categoriaAssociata.getNumeroGiorniRichiestaProroga());
    	 			
-   	 			    if((LocalDate.now().equals(ld2)) || (LocalDate.now().isAfter(ld2)))
-       	 		    {
-   	 				   setDataDiScadenzaPrestito(dataDiScadenzaPrestito.plusDays(categoriaAssociata.getNumeroMaxGiorniProroga()));
-       	 			   setProrogaNonEffettuata(LocalDate.now());
-       	 			   return true;
-       	 		    }
-       	        }
+   	 		   if((Data.verificaDataCoincidente(ld2)) || Data.verificaDataSuccessiva(ld2))
+       	 	   {
+   	 			   setDataDiScadenzaPrestito(Data.aumentaNumeroGiorni(dataDiScadenzaPrestito, categoriaAssociata.getNumeroMaxGiorniProroga()));
+       	 		   setProrogaNonEffettuata(LocalDate.now());
+       	 		   return true;
+       	 		}
+       	     }
    	 	}
 	    return false;
     }

@@ -1,12 +1,9 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
-
 import dominio.parte2.punto5.*;
-
+import utility.parte2.Data;
 
 public class ArchivioPrestiti implements Serializable
 {
@@ -60,8 +57,8 @@ public class ArchivioPrestiti implements Serializable
    	 	{
    	 		Prestito p = elencoPrestiti.get(i);	
    	 		
-   	 	    if((LocalDate.now().equals(p.getDataDiScadenzaPrestito())) || (LocalDate.now().isAfter(p.getDataDiScadenzaPrestito())))
-   	 		{
+   	 	    if((Data.verificaDataCoincidente((p.getDataDiScadenzaPrestito()))) || (Data.verificaDataSuccessiva((p.getDataDiScadenzaPrestito()))))
+   	 	    {
    	 			elencoPrestiti.remove(p);
    	 		}			
    	 	}  

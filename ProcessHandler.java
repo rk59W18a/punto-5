@@ -16,8 +16,8 @@ import dominio.parte2.punto5.Contenitore;
 import logica.parte2.punto5.Archivio;
 import logica.parte2.punto5.ArchivioPrestiti;
 import logica.parte2.punto5.Utente;
-import utility_2.Costanti;
-import utility_2.InputDati;
+import utility.parte2.Costanti;
+import utility.parte2.InputDati;
 
 public abstract class ProcessHandler implements Serializable
 {  
@@ -26,10 +26,10 @@ public abstract class ProcessHandler implements Serializable
 	private Archivio arc;
     private ArchivioPrestiti ap;
    
-    public ProcessHandler(Archivio arc, ArchivioPrestiti ap)
+    public ProcessHandler(RaccoltaDati rd)
     {  
-    	this.arc = arc;
-    	this.ap = ap;
+    	this.arc = rd.getArchivio();
+    	this.ap = rd.getArchivioPrestiti();
     }
     
     public Archivio getArchivio()
@@ -61,7 +61,7 @@ public abstract class ProcessHandler implements Serializable
    	 		return null;
     }
     
-    public ArrayList <Risorsa> ricercaRisorsaLibri(Utente ut, Categoria c)
+    public ArrayList <Risorsa> ricercaRisorsaLibri(Utente ut, Contenitore c)
     {
    	    int numScelta = InputDati.leggiIntero(Costanti.AVVIO_RICERCA_LIBRI, Costanti.NUM_MINIMO, Costanti.NUM_MASSIMO_RICERCA);
    	    String s = "";
@@ -93,7 +93,7 @@ public abstract class ProcessHandler implements Serializable
    	    return ut.ricercaRisorsa(c,r);
     }
    
-    public ArrayList <Risorsa> ricercaRisorsaFilm(Utente ut, Categoria c)
+    public ArrayList <Risorsa> ricercaRisorsaFilm(Utente ut, Contenitore c)
     {
    	    int numScelta = InputDati.leggiIntero(Costanti.AVVIO_RICERCA_FILM, Costanti.NUM_MINIMO, Costanti.NUM_MASSIMO_RICERCA);
    	    String s = "";

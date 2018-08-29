@@ -1,15 +1,18 @@
 package dominio.parte2.punto5;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Contenitore 
+public abstract class Contenitore implements Serializable
 {
-	 private String nomeCategoria;
-	 private ArrayList <Risorsa> elencoRisorse;
+	private static final long serialVersionUID = 1L;
+	
+	private String nome;
+	private ArrayList <Risorsa> elencoRisorse;
 	 
 	 public Contenitore(String n)
 	 {
-		 this.nomeCategoria = n;
+		 this.nome = n;
 	 }
 	 
 	 public void inizializzaElencoRisorse()
@@ -19,7 +22,7 @@ public abstract class Contenitore
 	 
 	 public String getNome()
 	 {
-		   return nomeCategoria;
+		   return nome;
 	 }
 	 
 	 public ArrayList <Risorsa> getElencoRisorse()  

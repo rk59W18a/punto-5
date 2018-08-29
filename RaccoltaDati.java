@@ -1,7 +1,6 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
-
 import logica.parte2.punto5.*;
 
 public class RaccoltaDati implements Serializable

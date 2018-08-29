@@ -1,9 +1,7 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import dominio.parte2.punto5.*;
 
 public class Utente implements Serializable
@@ -43,7 +41,7 @@ public class Utente implements Serializable
     	 return password; 
     }
   
-    public ArrayList <Risorsa> ricercaRisorsa(Categoria c, IRicercaStrategy r)
+    public ArrayList <Risorsa> ricercaRisorsa(Contenitore c, IRicercaStrategy r)
     {
        	 return c.ricercaRisorsa(r);
     }

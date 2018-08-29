@@ -3,6 +3,7 @@ package logica.parte2.punto5;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import utility.parte2.Data;
 
 public class AnagraficaFruitori extends Anagrafica implements Serializable
 {
@@ -40,7 +41,7 @@ public class AnagraficaFruitori extends Anagrafica implements Serializable
     	   {
     		   Fruitore f = (Fruitore) getElenco().get(i);
     		   
-    		   if((f.getNome()).equalsIgnoreCase(n) && (f.getCognome().equalsIgnoreCase(c)) && (f.getDataDiNascita().isEqual(dn)))
+    		   if((f.getNome()).equalsIgnoreCase(n) && (f.getCognome().equalsIgnoreCase(c)) && (Data.confrontaDate(dn, f.getDataDiNascita())))
                  return true;
     	   }
     	   
@@ -66,7 +67,7 @@ public class AnagraficaFruitori extends Anagrafica implements Serializable
    	 	{
    	 		Fruitore f = (Fruitore) getElenco().get(i);	
    	 		
-   	 	    if ((LocalDate.now().equals(f.getDataDiScadenza())) || (LocalDate.now().isAfter(f.getDataDiScadenza())))
+   	 	    if((LocalDate.now().equals(f.getDataDiScadenza())) || Data.verificaDataSuccessiva(f.getDataDiScadenza()))
    	 	    {
    	 	    	getElenco().remove(f);
    	 	      	as.getDecadenzeFruitoriStoriche().aggiungiFruitore(f);

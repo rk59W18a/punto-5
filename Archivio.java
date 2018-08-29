@@ -1,11 +1,8 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import dominio.parte2.punto5.*;
-
 
 public class Archivio implements Serializable
 {  

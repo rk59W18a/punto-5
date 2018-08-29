@@ -1,23 +1,18 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
-
-
 import java.time.LocalDate;
-
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
 import logica.parte2.punto5.AnagraficaFruitori;
 import logica.parte2.punto5.AnagraficaOperatori;
-import logica.parte2.punto5.Archivio;
-import logica.parte2.punto5.ArchivioPrestiti;
 import logica.parte2.punto5.ArchivioStorico;
 import logica.parte2.punto5.Fruitore;
 import logica.parte2.punto5.Operatore;
 import logica.parte2.punto5.Utente;
-import utility_2.Costanti;
-import utility_2.InputDati;
+import utility.parte2.Costanti;
+import utility.parte2.InputDati;
 
 public class ProcessOperatoreHandler extends ProcessHandler implements Serializable
 {
@@ -27,12 +22,12 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
 	private AnagraficaOperatori ao;
     private ArchivioStorico as;
    
-    public ProcessOperatoreHandler(Archivio arc, ArchivioPrestiti ap, AnagraficaFruitori af, AnagraficaOperatori ao, ArchivioStorico as)
+    public ProcessOperatoreHandler(RaccoltaDati rd)
     {  
-    	super(arc, ap);
-    	this.af = af;
-    	this.ao = ao;
-    	this.as = as;
+    	super(rd);
+    	this.af = rd.getAnagraficaFruitori();
+    	this.ao = rd.getAnagraficaOperatori();
+    	this.as = rd.getArchivioStorico();
     }
     
      public Utente accesso()
