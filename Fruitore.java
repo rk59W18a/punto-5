@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import utility.parte2.Data;
 
 public class Fruitore extends Utente implements Serializable

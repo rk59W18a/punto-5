@@ -2,7 +2,6 @@ package logica.parte2.punto5;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import utility.parte2.Data;
 
 public class AnagraficaFruitori extends Anagrafica implements Serializable

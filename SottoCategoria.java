@@ -1,6 +1,8 @@
 package dominio.parte2.punto5;
 
 import java.io.Serializable;
+
+
 import java.util.ArrayList;
 
 public class SottoCategoria extends Contenitore implements Serializable
