@@ -1,12 +1,9 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import dominio.parte2.punto5.*;
-import utility_2.Costanti;
-
+import utility.parte2.Costanti;
 
 public class ArchivioStorico implements Serializable
 {
@@ -36,12 +33,12 @@ public class ArchivioStorico implements Serializable
     
     public AnagraficaFruitori getRinnovoIscrizioniFruitoriStorici()
     {
-    	    return rinnovoIscrizioniFruitoriStorici;
+    	return rinnovoIscrizioniFruitoriStorici;
     }
     
     public AnagraficaFruitori getDecadenzeFruitoriStoriche()
     {
-    	    return decadenzeFruitoriStoriche;
+    	return decadenzeFruitoriStoriche;
     }
 	
     public ArchivioPrestiti getPrestitiStorici()

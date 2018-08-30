@@ -1,12 +1,9 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
 import dominio.parte2.punto5.*;
-import utility_2.Data;
-
+import utility.parte2.Data;
 
 public class ArchivioPrestiti implements Serializable
 {
@@ -61,7 +58,7 @@ public class ArchivioPrestiti implements Serializable
    	 		Prestito p = elencoPrestiti.get(i);	
    	 		
    	 	    if((Data.verificaDataCoincidente((p.getDataDiScadenzaPrestito()))) || (Data.verificaDataSuccessiva((p.getDataDiScadenzaPrestito()))))
-   	 		{
+   	 	    {
    	 			elencoPrestiti.remove(p);
    	 		}			
    	 	}  
@@ -111,5 +108,17 @@ public class ArchivioPrestiti implements Serializable
 	    	     return true;
 	    else
 	         return false;
+	}
+	
+	public String toString()
+	{
+		StringBuffer s = new StringBuffer();
+		
+		for(int i = 0; i < elencoPrestiti.size(); i++)
+		{
+			s.append(i+1 + ")" + elencoPrestiti.get(i).toString() + "\n");
+		}
+		
+		return s.toString();
 	}
 }

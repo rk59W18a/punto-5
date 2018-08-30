@@ -1,12 +1,9 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import dominio.parte2.punto5.*;
-import utility_2.Data;
+import utility.parte2.Data;
 
 public class Prestito implements Serializable
 {
@@ -26,7 +23,7 @@ public class Prestito implements Serializable
 	{
 		this.dataDiInizioPrestito = LocalDate.now();
 		this.categoriaAssociata = c;
-		this.dataDiScadenzaPrestito = dataDiInizioPrestito.plusDays(categoriaAssociata.getNumeroMaxGiorniPrestito());
+		this.dataDiScadenzaPrestito = Data.aumentaNumeroGiorni(dataDiInizioPrestito, categoriaAssociata.getNumeroMaxGiorniPrestito());
 		this.fruitoreAssociato = f;
 		this.risorsaInPrestito = r;
 		this.prorogaNonEffettuata = true;
@@ -80,19 +77,19 @@ public class Prestito implements Serializable
 	
     public boolean prorogaPrestito()
     {
-        if(prorogaNonEffettuata)
+    	if(prorogaNonEffettuata)
    	    {
-        	    if(Data.verificaDataPrecedente(dataDiScadenzaPrestito))
-   	 		    {
-       	 	    	LocalDate ld2 = Data.diminuisciNumeroGiorni(dataDiScadenzaPrestito, categoriaAssociata.getNumeroGiorniRichiestaProroga());
+        	if(Data.verificaDataPrecedente(dataDiScadenzaPrestito))
+   	 		{
+       	 	   LocalDate ld2 = Data.diminuisciNumeroGiorni(dataDiScadenzaPrestito, categoriaAssociata.getNumeroGiorniRichiestaProroga());
    	 			
-   	 			    if((Data.verificaDataCoincidente(ld2)) || Data.verificaDataSuccessiva(ld2))
-       	 		    {
-   	 				   setDataDiScadenzaPrestito(Data.aumentaNumeroGiorni(dataDiScadenzaPrestito, categoriaAssociata.getNumeroMaxGiorniProroga()));
-       	 			   setProrogaNonEffettuata(LocalDate.now());
-       	 			   return true;
-       	 		    }
-       	        }
+   	 		   if((Data.verificaDataCoincidente(ld2)) || Data.verificaDataSuccessiva(ld2))
+       	 	   {
+   	 			   setDataDiScadenzaPrestito(Data.aumentaNumeroGiorni(dataDiScadenzaPrestito, categoriaAssociata.getNumeroMaxGiorniProroga()));
+       	 		   setProrogaNonEffettuata(Data.getDataAttuale());
+       	 		   return true;
+       	 		}
+       	     }
    	 	}
 	    return false;
     }
@@ -100,13 +97,12 @@ public class Prestito implements Serializable
     public String toString()
     {
         StringBuffer ris = new StringBuffer();
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Fruitore.FORMATO_DATA);
   	
 	    String perProroga = "no";
   	    if(!prorogaNonEffettuata)
   		      perProroga = "si";
   	
-  	    ris.append(String.format(DESCRIZIONE_PRESTITO, categoriaAssociata.getNome(), risorsaInPrestito.toString(), dataDiInizioPrestito.format(formatter), dataDiScadenzaPrestito.format(formatter), perProroga));
+  	    ris.append(String.format(DESCRIZIONE_PRESTITO, categoriaAssociata.getNome(), risorsaInPrestito.toString(), Data.getDataFormattata(dataDiInizioPrestito), Data.getDataFormattata(dataDiScadenzaPrestito), perProroga));
         return ris.toString();
 
     }   

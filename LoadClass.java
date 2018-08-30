@@ -1,18 +1,19 @@
 package interazione.parte2.punto5;
 
 import java.io.File;
-
+import java.io.Serializable;
 import logica.parte2.punto5.*;
-import utility_2.*;
+import utility.parte2.*;
 
-public class LoadClass 
+public class LoadClass implements Serializable
 {
+	 private static final long serialVersionUID = 1L;
+
 	 private File gestoreRisorse = new File(Costanti.NOME_FILE);
 	 
 	 private static LoadClass instance;
 	    
 	 private RaccoltaDati rd;
-	 
 	 private AnagraficaFruitori af;
 	 private AnagraficaOperatori ao;
 	 private Archivio arc;
@@ -29,6 +30,11 @@ public class LoadClass
 		 }
 		 return instance;
 	 }
+	 
+	 public RaccoltaDati getRaccoltaDati()
+     {
+		   return rd;
+     }
 		
 	 public void inizializza() 
 	 {
@@ -72,22 +78,18 @@ public class LoadClass
 			ap = new ArchivioPrestiti();
 			as = new ArchivioStorico();
 			
+			rd = new RaccoltaDati(af, ao, arc, ap, as);
+			
 			StrutturaSistema.aggiuntaOperatoriPreimpostati(ao);
 			StrutturaSistema.creazioneStrutturaArchivioLibri(arc);
 			StrutturaSistema.creazioneStrutturaArchivioFilm(arc);
 		}
 	}
-	 
-	public RaccoltaDati getRaccoltaDati()
-	{
-	   return rd;
-	}
-	    
+	        
 	public void salva() 
 	{	
 	   System.out.println(Costanti.MSG_SALVA);
 	   rd = new RaccoltaDati(af, ao, arc, ap, as);
 	   ServizioFile.salvaSingoloOggetto(gestoreRisorse, rd); 
-	}
-	
+	 } 	
 }

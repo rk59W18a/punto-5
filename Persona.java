@@ -1,4 +1,4 @@
-package logica.parte2.punto5;
+package dominio.parte2.punto5;
 
 import java.io.Serializable;
 
@@ -6,8 +6,10 @@ public class Persona implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private final String nome;
-    private final String cognome;
+	private String nome;
+    private String cognome;
+    
+    public static final String DESCRIZIONE_PERSONA = "%s  %s";
     
     public Persona(String nome, String cognome)
     {
@@ -38,7 +40,7 @@ public class Persona implements Serializable
     public String toString()
     {
     	StringBuffer ris = new StringBuffer();
-    	ris.append(String.format("%s  %s", getNome(), getCognome()));
+    	ris.append(String.format(DESCRIZIONE_PERSONA, getNome(), getCognome()));
     	return ris.toString();
     }
 }

@@ -4,7 +4,7 @@ public class Main
 {	
 	public static void main(String[] args) 
 	{
-		LoadClass.getinstance().inizializza();
+        LoadClass.getinstance().inizializza();
 		
 		RaccoltaDati rd = LoadClass.getinstance().getRaccoltaDati();
 	
@@ -16,5 +16,4 @@ public class Main
 
 		LoadClass.getinstance().salva();
 	}
-	
 }

@@ -1,13 +1,10 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import utility_2.Data;
-
+import utility.parte2.Data;
 
 public class Fruitore extends Utente implements Serializable
 {
@@ -20,16 +17,15 @@ public class Fruitore extends Utente implements Serializable
     public static final String DESCRIZIONE_FRUITORE = "\nNome: %s\nCognome: %s\nUsername: %s\nPassword: %s\nData di nascita: %s\nData di iscrizione: %s\nData di scadenza: %s\n";
     public static final int TERMINE_SCADENZA = 5;
     public static final int DIECI_GIORNI = 10;
-    public static final String FORMATO_DATA = "dd/MM/yyyy";
     public static final String NO_PRESTITI_ATTIVI = "Al momento non ci sono prestiti\n";
     public static final String PRESTITI_ATTIVI = "Elenco dei prestiti attivi:\n";
         
     public Fruitore(String n, String c, int an, int mn, int gn, String u, String p)
     {
    	     super(n, c, u, p);
-   	     this.dataDiNascita = LocalDate.of(an, mn, gn);
-   	     this.dataDiIscrizione = LocalDate.now();
-   	     this.dataDiScadenza = dataDiIscrizione.plusYears(TERMINE_SCADENZA);
+   	     this.dataDiNascita = Data.getDataImpostata(an, mn, gn);
+   	     this.dataDiIscrizione = Data.getDataAttuale();
+   	     this.dataDiScadenza = Data.aumentaNumeroAnni(dataDiIscrizione, TERMINE_SCADENZA);
     }
     
     public LocalDate getDataDiNascita()
@@ -58,7 +54,7 @@ public class Fruitore extends Utente implements Serializable
 		 {
 			  LocalDate ld = dataDiScadenza.minusDays(DIECI_GIORNI);
 				
-		      if((Data.verificaDataCoincidente(ld)) || (Data.verificaDataSuccessiva(ld))) 
+			  if((Data.verificaDataCoincidente(ld)) || (Data.verificaDataSuccessiva(ld))) 
 			  {
 				 setDataDiScadenza(Data.aumentaNumeroAnni(dataDiScadenza, TERMINE_SCADENZA));
 				 return true;
@@ -102,9 +98,8 @@ public class Fruitore extends Utente implements Serializable
     public String toString()
     {
       	StringBuffer ris = new StringBuffer();
-      	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMATO_DATA);
     	    
-      	ris.append(String.format(DESCRIZIONE_FRUITORE, getNome(), getCognome(), getUsername(), getPassword(), dataDiNascita.format(formatter), dataDiIscrizione.format(formatter), dataDiScadenza.format(formatter)));
+      	ris.append(String.format(DESCRIZIONE_FRUITORE, getNome(), getCognome(), getUsername(), getPassword(), Data.getDataFormattata(dataDiNascita), Data.getDataFormattata(dataDiIscrizione), Data.getDataFormattata(dataDiScadenza)));
         return ris.toString();
     }   
 }
