@@ -258,7 +258,7 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
     	 Risorsa r = null;
     	 Prestito p = null;
     	
-    	 System.out.printf(Costanti.CONTENUTO_ARC, getArchivio().stampaElencoCategorie());
+    	 System.out.printf(Costanti.CONTENUTO_ARC, stampaElencoCategorie());
     	 int num1 = InputDati.leggiIntero(Costanti.INS_NUMERO_CAT_PRESTITO, Costanti.NUM_MINIMO, (getArchivio().getElencoCategorie()).size());
     	 c = (getArchivio().getElencoCategorie()).get(num1-Costanti.NUM_MINIMO);
 

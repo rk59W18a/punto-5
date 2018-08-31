@@ -21,7 +21,7 @@ public class Prestito implements Serializable
 	
 	public Prestito(Categoria c, Fruitore f, Risorsa r)
 	{
-		this.dataDiInizioPrestito = LocalDate.now();
+		this.dataDiInizioPrestito = Data.getDataAttuale();
 		this.categoriaAssociata = c;
 		this.dataDiScadenzaPrestito = Data.aumentaNumeroGiorni(dataDiInizioPrestito, categoriaAssociata.getNumeroMaxGiorniPrestito());
 		this.fruitoreAssociato = f;

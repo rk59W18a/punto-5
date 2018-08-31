@@ -50,7 +50,7 @@ public class Fruitore extends Utente implements Serializable
     
     public boolean rinnovaIscrizione()
     {
-    	 if((LocalDate.now().isBefore(dataDiScadenza)))
+    	 if(Data.verificaDataPrecedente(dataDiScadenza))
 		 {
 			  LocalDate ld = dataDiScadenza.minusDays(DIECI_GIORNI);
 				

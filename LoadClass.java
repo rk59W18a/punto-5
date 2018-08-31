@@ -36,8 +36,10 @@ public class LoadClass implements Serializable
 		   return rd;
      }
 		
+	 
 	 public void inizializza() 
 	 {
+		 
 		 boolean caricamentoRiuscito = false;
 		 
 		 if(gestoreRisorse.exists())
@@ -91,5 +93,5 @@ public class LoadClass implements Serializable
 	   System.out.println(Costanti.MSG_SALVA);
 	   rd = new RaccoltaDati(af, ao, arc, ap, as);
 	   ServizioFile.salvaSingoloOggetto(gestoreRisorse, rd); 
-	 } 	
+	 }	
 }
