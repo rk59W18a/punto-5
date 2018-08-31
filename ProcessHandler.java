@@ -13,8 +13,10 @@ import dominio.parte2.punto5.RicercaPerTitoloStrategy;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
 import dominio.parte2.punto5.Contenitore;
+import logica.parte2.punto5.AnagraficaFruitori;
 import logica.parte2.punto5.Archivio;
 import logica.parte2.punto5.ArchivioPrestiti;
+import logica.parte2.punto5.ArchivioStorico;
 import logica.parte2.punto5.Utente;
 import utility.parte2.Costanti;
 import utility.parte2.InputDati;
@@ -25,11 +27,15 @@ public abstract class ProcessHandler implements Serializable
 	
 	private Archivio arc;
     private ArchivioPrestiti ap;
-   
+    private AnagraficaFruitori af;
+    private ArchivioStorico as;
+    
     public ProcessHandler(RaccoltaDati rd)
     {  
     	this.arc = rd.getArchivio();
     	this.ap = rd.getArchivioPrestiti();
+    	this.af = rd.getAnagraficaFruitori();
+    	this.as = rd.getArchivioStorico();
     }
     
     public Archivio getArchivio()
@@ -41,7 +47,17 @@ public abstract class ProcessHandler implements Serializable
     {
     	return ap;
     }
-
+    
+    public AnagraficaFruitori getAnagraficaFruitori()
+    {
+    	return af;
+    }
+    
+    public ArchivioStorico getArchivioStorico()
+    {
+    	return as;
+    }
+    
     public abstract Utente accesso();
   
     public ArrayList <Risorsa> ricercaRisorsa(Utente ut)

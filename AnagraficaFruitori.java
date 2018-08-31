@@ -66,11 +66,11 @@ public class AnagraficaFruitori extends Anagrafica implements Serializable
    	 	{
    	 		Fruitore f = (Fruitore) getElenco().get(i);	
    	 		
-   	 	    if((LocalDate.now().equals(f.getDataDiScadenza())) || Data.verificaDataSuccessiva(f.getDataDiScadenza()))
-   	 	    {
-   	 	    	getElenco().remove(f);
-   	 	      	as.getDecadenzeFruitoriStoriche().aggiungiFruitore(f);
-   	 	    }
+   	 	    if((Data.verificaDataCoincidente(f.getDataDiScadenza())) || Data.verificaDataSuccessiva(f.getDataDiScadenza()))
+	 	    {
+	 	    	getElenco().remove(f);
+	 	      	as.getDecadenzeFruitoriStoriche().aggiungiFruitore(f);
+	 	    }
    	 	}
     }
        

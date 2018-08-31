@@ -1,13 +1,12 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
+
 import java.time.LocalDate;
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
-import logica.parte2.punto5.AnagraficaFruitori;
 import logica.parte2.punto5.AnagraficaOperatori;
-import logica.parte2.punto5.ArchivioStorico;
 import logica.parte2.punto5.Fruitore;
 import logica.parte2.punto5.Operatore;
 import logica.parte2.punto5.Utente;
@@ -18,16 +17,12 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
 {
 	private static final long serialVersionUID = 1L;
 	
-	private AnagraficaFruitori af;
 	private AnagraficaOperatori ao;
-    private ArchivioStorico as;
    
     public ProcessOperatoreHandler(RaccoltaDati rd)
     {  
     	super(rd);
-    	this.af = rd.getAnagraficaFruitori();
     	this.ao = rd.getAnagraficaOperatori();
-    	this.as = rd.getArchivioStorico();
     }
     
      public Utente accesso()
@@ -64,7 +59,7 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
 	
 	public void visualizzaElencoFruitori(Operatore op)
 	{
-		System.out.println(op.visualizzaElencoFruitori(af));
+		System.out.println(op.visualizzaElencoFruitori(getAnagraficaFruitori()));
 	}
 	
 	public void aggiungiRisorsaCategoriaSenzaSottoCategorie(Operatore op, Categoria c, Risorsa nuovar)
@@ -168,7 +163,7 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
      			int num2 = InputDati.leggiIntero(Costanti.INS_NUMERO_RISORSA_RIMOZIONE, Costanti.NUM_MINIMO, (c.getElencoRisorse()).size());
  		      	daEliminare = (c.getElencoRisorse()).get(num2-Costanti.NUM_MINIMO);
  		     	op.rimuoviRisorsaCategoria(daEliminare, c);
- 		     	as.aggiungiRisorsaRimossa(daEliminare);
+ 		     	getArchivioStorico().aggiungiRisorsaRimossa(daEliminare);
          		System.out.println(Costanti.OP_SUCCESSO);
  	    	}
  	    } 
@@ -196,7 +191,7 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
  	      	     	int num3 = InputDati.leggiIntero(Costanti.INS_NUMERO_RISORSA_RIMOZIONE, Costanti.NUM_MINIMO, (sc.getElencoRisorse()).size());
      	    		daEliminare = (sc.getElencoRisorse()).get(num3-Costanti.NUM_MINIMO);
      	    		op.rimuoviRisorsaCategoria(daEliminare, sc);
-     	    		as.aggiungiRisorsaRimossa(daEliminare);
+     	    		getArchivioStorico().aggiungiRisorsaRimossa(daEliminare);
      	           	System.out.println(Costanti.OP_SUCCESSO);
  	      	    }
  	      	}
@@ -237,7 +232,7 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
      
      public String sceltaInterrogazione(Operatore o)
      {
-  	    int numScelta = InputDati.leggiIntero(Costanti.SCELTA_INTERROGAZIONE, Costanti.NUM_MINIMO, Costanti.NUM_MASSIMO_RICERCA);
+  	    int numScelta = InputDati.leggiIntero(Costanti.SCELTA_INTERROGAZIONE, Costanti.NUM_MINIMO, Costanti.NUM_MASSIMO_SCELTA_INTERROGAZIONE);
   	    int anno = 0;
   	    Fruitore f = null;
   	    String s1 = "";
@@ -247,13 +242,13 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
   	    
   	    switch(numScelta)
   	    {
-  	       case 1: s2 = Costanti.NUM_PRESTITI_PER_ANNO + o.numeroPrestitiPerAnno(as, anno);
+  	       case 1: s2 = Costanti.NUM_PRESTITI_PER_ANNO + o.numeroPrestitiPerAnno(getArchivioStorico(), anno);
   	    			    break;
   	    		
-  	       case 2: s2 = Costanti.NUM_PROROGHE_PER_ANNO + o.numeroProroghePerAnno(as, anno);
+  	       case 2: s2 = Costanti.NUM_PROROGHE_PER_ANNO + o.numeroProroghePerAnno(getArchivioStorico(), anno);
   	    			    break;
   	       
-  	       case 3: s2 = o.risorsaPiuRichiesta(as, anno);
+  	       case 3: s2 = o.risorsaPiuRichiesta(getArchivioStorico(), anno);
   	    	           if(!(s2.equals("")))
   	    	           {
   	    	              s2 = Costanti.TITOLO_RISORSA_PIU_PRESTITI_PER_ANNO + s2;
@@ -266,10 +261,10 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
   	    	   
   	       case 4: s1 = InputDati.leggiStringa(Costanti.INS_FRUITORE_RICHIESTO);
   	    			 
-  	    		   if(af.getFruitore(s1) != null)
+  	    		   if(getAnagraficaFruitori().getFruitore(s1) != null)
   	    		   {
-  	    			  f = af.getFruitore(s1);
-  	   	        	  s2 = Costanti.NUM_PRESTITI_PER_FRUITORE_PER_ANNO + o.numeroPrestitiPerFruitorePerAnno(as, f, anno);
+  	    			  f = getAnagraficaFruitori().getFruitore(s1);
+  	   	        	  s2 = Costanti.NUM_PRESTITI_PER_FRUITORE_PER_ANNO + o.numeroPrestitiPerFruitorePerAnno(getArchivioStorico(), f, anno);
   	    		   }
   	    		   else
   	   			   {

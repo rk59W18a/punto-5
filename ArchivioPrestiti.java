@@ -58,9 +58,9 @@ public class ArchivioPrestiti implements Serializable
    	 		Prestito p = elencoPrestiti.get(i);	
    	 		
    	 	    if((Data.verificaDataCoincidente((p.getDataDiScadenzaPrestito()))) || (Data.verificaDataSuccessiva((p.getDataDiScadenzaPrestito()))))
-   	 	    {
-   	 			elencoPrestiti.remove(p);
-   	 		}			
+	 	    {
+	 			elencoPrestiti.remove(p);
+	 		}			
    	 	}  
     }
     
