@@ -1,86 +1,30 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
-
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.Period;
-
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
-import logica.parte2.punto5.AnagraficaFruitori;
-import logica.parte2.punto5.Archivio;
-import logica.parte2.punto5.ArchivioPrestiti;
-import logica.parte2.punto5.ArchivioStorico;
 import logica.parte2.punto5.Fruitore;
 import logica.parte2.punto5.Prestito;
 import logica.parte2.punto5.Utente;
-import utility_2.Costanti;
-import utility_2.InputDati;
+import utility.parte2.Costanti;
+import utility.parte2.Data;
+import utility.parte2.InputDati;
 
 public class ProcessFruitoreHandler extends ProcessHandler implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	
-	private AnagraficaFruitori af;
-    private ArchivioStorico as;
-    
-    public ProcessFruitoreHandler(Archivio arc, ArchivioPrestiti ap, AnagraficaFruitori af, ArchivioStorico as)
+	//Applicazione dei pattern di Refactoring 'Preserve Whole Object' e
+    //'Introduce Parameter Object': al costruttore viene passato l'intero oggetto RaccoltaDati.
+    public ProcessFruitoreHandler(RaccoltaDati rd)
     {
-    	super(arc, ap);
-    	this.af = af;
-    	this.as = as;
-    }
-    
-    public void verificaCondizioni(Fruitore f, boolean ins_nome, boolean ins_cognome, boolean ins_data, boolean ins_use, boolean end) {
-		
-    	if(af.verificaPresenza(f.getNome(), f.getCognome(), f.getDataDiNascita()))
-		{
-			System.out.println(Costanti.ISCRIZIONE_NON_OK_FRUITORE_GIA_ISCRITTO);
-			ins_nome = true;
-			ins_cognome = true;
-			ins_data = true;
-			end = false;
-		}
-		
-		if(af.verificaStessoUsername(f.getUsername()))
-		{
-			System.out.println(Costanti.ISCRIZIONE_NON_OK_STESSO_USERNAME);
-			ins_use = true;
-			end = false;
-		}
-		
-		if(Period.between(f.getDataDiNascita(), LocalDate.now()).getYears() < Costanti.MAGGIORE_ETA)
-		{
-			System.out.println(Costanti.ISCRIZIONE_NON_OK_MAGGIORE_ETA);
-			ins_nome = true;
-			ins_cognome = true;
-			ins_data = true;
-			end = false;
-		}
-    }
-    
-    public void aggiungiNuovoFruitore(boolean end, Fruitore f) {
-		
-    	if(end)
-		{
-			af.aggiungiFruitore(f);
-			as.getIscrizioniFruitoriStoriche().aggiungiFruitore(f);
-			System.out.println(Costanti.ISCRIZIONE_OK);
-		}
-		else
-		{
-
-			if(InputDati.leggiUpperChar(Costanti.RICHIESTA_PROSECUZIONE, "SN") == 'N')
-			{
-				end = true;				
-				System.out.println(Costanti.ISCRIZIONE_NON_OK);
-			}	
-		}
-    	
+    	super(rd);
     }
   
+    /*
 	public void iscrizione()
 	{
 		String nome = "";
@@ -153,9 +97,49 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
 			ins_pwd = false;
 			ins_data = false;
 
-			verificaCondizioni(f, ins_nome, ins_cognome, ins_data, ins_use, end);
-		
-			aggiungiNuovoFruitore(end, f);
+			if(getAnagraficaFruitori().verificaPresenza(f.getNome(), f.getCognome(), f.getDataDiNascita()))
+			{
+				System.out.println(Costanti.ISCRIZIONE_NON_OK_FRUITORE_GIA_ISCRITTO);
+				ins_nome = true;
+				ins_cognome = true;
+				ins_data = true;
+				end = false;
+			}
+			
+			if(getAnagraficaFruitori().verificaStessoUsername(f.getUsername()))
+			{
+				System.out.println(Costanti.ISCRIZIONE_NON_OK_STESSO_USERNAME);
+				ins_use = true;
+				end = false;
+			}
+			*/
+			
+			//applicazione pattern 'Introduce Foreign Method' 
+			if(Period.between(f.getDataDiNascita(), Data.getDataAttuale()).getYears() < Costanti.MAGGIORE_ETA)
+			{
+				//System.out.println(Costanti.ISCRIZIONE_NON_OK_MAGGIORE_ETA);
+				//ins_nome = true;
+				//ins_cognome = true;
+				//ins_data = true;
+				//end = false;
+			}
+			
+		    /*
+			if(end)
+			{
+				getAnagraficaFruitori().aggiungiFruitore(f);
+				getArchivioStorico().getIscrizioniFruitoriStoriche().aggiungiFruitore(f);
+				System.out.println(Costanti.ISCRIZIONE_OK);
+			}
+			else
+			{
+	
+				if(InputDati.leggiUpperChar(Costanti.RICHIESTA_PROSECUZIONE, "SN") == 'N')
+				{
+					end = true;				
+					System.out.println(Costanti.ISCRIZIONE_NON_OK);
+				}	
+			}
 			
 		}while(!end);
 	    
@@ -165,7 +149,7 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
 	{
 		if(f.rinnovaIscrizione())
         {
-	        as.getRinnovoIscrizioniFruitoriStorici().aggiungiFruitore(f);
+	        getArchivioStorico().getRinnovoIscrizioniFruitoriStorici().aggiungiFruitore(f);
 	        System.out.println(Costanti.RINNOVO_OK);
         }
 		else
@@ -184,9 +168,9 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
 		      use = InputDati.leggiStringaNonVuota(Costanti.USERNAME);
 		      pwd = InputDati.leggiStringaNonVuota(Costanti.PASSWORD);
 
-			  if(af.accedi(use, pwd))
+			  if(getAnagraficaFruitori().accedi(use, pwd))
 			  {
-				  ut = af.getUtente(use, pwd);
+				  ut = getAnagraficaFruitori().getUtente(use, pwd);
 				  end = true;
 			  }
 			  else
@@ -208,39 +192,44 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
 	{
 		System.out.println(f.prestitiInCorso(getArchivioPrestiti()));
 	}
+	*/
 
-	public void registraPrestitoSenzaSottoCategorie(Fruitore f, Categoria c, Risorsa r, Prestito nuovo) {
-  	  
+	//Metodo introdotto in seguito all'applicazione del pattern di Refactoring 'Extract Method'
+	//al metodo registraPrestito.
+	public void registraPrestitoSenzaSottoCategorie(Fruitore f, Categoria c, Risorsa r, Prestito nuovo) 
+	{
 		if(c.getElencoRisorse().size() != Costanti.VUOTO)  
 	    {
   	    	     System.out.printf(Costanti.CONTENUTO_CAT_RISORSA, c.getNome(), stampaElencoRisorse(c));
 	      	 
   	    	     if(InputDati.leggiUpperChar(Costanti.INS_PROCEDERE_PRESTITO, "SN") == 'S')
-	    	         {
+	    	     {
   	    	        int num = InputDati.leggiIntero(Costanti.INS_NUMERO_RISORSA_PRESTITO, Costanti.NUM_MINIMO, c.getElencoRisorse().size());
 	                r = c.getElencoRisorse().get(num-Costanti.NUM_MINIMO);
 	    	
 	                if(getArchivioPrestiti().controlloDisponibilitaRisorsa(r) && getArchivioPrestiti().controlloPerUlteriorePrestito(c, f.getUsername()) && !(getArchivioPrestiti().verificaPresenza(r, f.getUsername())))
-	   	                {
+	   	            {
 	   		               nuovo = new Prestito(c, f, r);
 	   		               f.registraNuovoPrestito(getArchivioPrestiti(), nuovo);
-	   		               as.getPrestitiStorici().aggiungiPrestito(nuovo);
+	   		               getArchivioStorico().getPrestitiStorici().aggiungiPrestito(nuovo);
 	    	               System.out.println(Costanti.OP_SUCCESSO);
-	   	                }
-	   	                else if(!(getArchivioPrestiti().controlloDisponibilitaRisorsa(r)))
-	                          System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_1);
-                   else if(!(getArchivioPrestiti().controlloPerUlteriorePrestito(c, f.getUsername())))
-	                              System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_2);
-                   else  
-           	              System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_3);
+	   	             }
+	   	             else if(!(getArchivioPrestiti().controlloDisponibilitaRisorsa(r)))
+	                           System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_1);
+                     else if(!(getArchivioPrestiti().controlloPerUlteriorePrestito(c, f.getUsername())))
+	                           System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_2);
+                     else  
+           	                   System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_3);
 	    	      }
 	    	} 
-  	    else
+  	        else
   	    	    System.out.printf(Costanti.CONTENUTO_ELENCO_RISORSE_CAT_VUOTO, c.getNome());
 	}
 	
-	public void registraPrestitoConSottoCategorie(Fruitore f, Categoria c, Risorsa r, Prestito nuovo, SottoCategoria sc) {
-   		
+	//Metodo introdotto in seguito all'applicazione del pattern di Refactoring 'Extract Method'
+    //al metodo registraPrestito.
+	public void registraPrestitoConSottoCategorie(Fruitore f, Categoria c, Risorsa r, Prestito nuovo, SottoCategoria sc) 
+	{
 		System.out.printf(Costanti.CONTENUTO_CAT_SOTTO, c.getNome(), stampaElencoSottocategorie(c));
 		int num2 = InputDati.leggiIntero(Costanti.INS_NUMERO_SOTTOC_PRESTITO, Costanti.NUM_MINIMO, (c.getElencoSottoCategorie()).size());
 	    sc = (c.getElencoSottoCategorie()).get(num2-Costanti.NUM_MINIMO);
@@ -258,8 +247,8 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
               {
 	   		         nuovo = new Prestito(c, f, r);
 	   		         f.registraNuovoPrestito(getArchivioPrestiti(), nuovo);
-	   		         as.getPrestitiStorici().aggiungiPrestito(nuovo);
-      	         System.out.println(Costanti.OP_SUCCESSO);
+	   		         getArchivioStorico().getPrestitiStorici().aggiungiPrestito(nuovo);
+      	             System.out.println(Costanti.OP_SUCCESSO);
               }
               else if(!(getArchivioPrestiti().controlloDisponibilitaRisorsa(r)))
       	                System.out.println(Costanti.OP_NO_SUCCESSO_PRESTITO_1);
@@ -273,6 +262,8 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
 		    System.out.printf(Costanti.CONTENUTO_ELENCO_RISORSE_SOTTO_VUOTO, sc.getNome());	
 	}
 	
+	//Metodo modificato sulla base dell'applicazione del pattern di Refactoring
+	//'Extract Method'.
     public void registraPrestito(Fruitore f) 
     {
     	 Categoria c = null;
@@ -280,7 +271,7 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
     	 Risorsa r = null;
     	 Prestito p = null;
     	
-    	 System.out.printf(Costanti.CONTENUTO_ARC, getArchivio().stampaElencoCategorie());
+    	 System.out.printf(Costanti.CONTENUTO_ARC, stampaElencoCategorie());
     	 int num1 = InputDati.leggiIntero(Costanti.INS_NUMERO_CAT_PRESTITO, Costanti.NUM_MINIMO, (getArchivio().getElencoCategorie()).size());
     	 c = (getArchivio().getElencoCategorie()).get(num1-Costanti.NUM_MINIMO);
 
@@ -297,7 +288,8 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
     		 registraPrestitoConSottoCategorie(f,c,r,p,sc);
     	}	
     }
-   
+    
+    /*
     public void richiediProroga(Fruitore f) 
     { 
    	    if(getArchivioPrestiti().getPrestiti(f.getUsername()).size() != Costanti.VUOTO)
@@ -311,7 +303,7 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
    	      
    	          if(f.registraProrogaPrestito(pr))
    	          {
-   	    	       as.getPrestitiConProrogheStoriche().aggiungiPrestito(pr);;
+   	    	       getArchivioStorico().getPrestitiConProrogheStoriche().aggiungiPrestito(pr);;
    	    	       System.out.println(Costanti.OP_SUCCESSO);
    	          }
    	          else
@@ -328,7 +320,8 @@ public class ProcessFruitoreHandler extends ProcessHandler implements Serializab
     
     public void controlloScadenzeAutomatiche()
     {
- 	    af.decadenzaFruitore(as);
+    	getAnagraficaFruitori().decadenzaFruitore(getArchivioStorico());
         getArchivioPrestiti().scadenzaPrestito();
-    }   
+    } 
+    */  
 }
