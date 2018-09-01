@@ -1,8 +1,6 @@
 package interazione.parte2.punto5;
 
 import java.io.Serializable;
-
-import java.time.LocalDate;
 import dominio.parte2.punto5.Categoria;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
@@ -11,6 +9,7 @@ import logica.parte2.punto5.Fruitore;
 import logica.parte2.punto5.Operatore;
 import logica.parte2.punto5.Utente;
 import utility.parte2.Costanti;
+import utility.parte2.Data;
 import utility.parte2.InputDati;
 
 public class ProcessOperatoreHandler extends ProcessHandler implements Serializable
@@ -238,7 +237,7 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
   	    String s1 = "";
   	    String s2 = "";
   	    
-  	    anno = InputDati.leggiIntero(Costanti.INS_ANNO_RICHIESTO, Costanti.ANNO_MINIMO_INTERROGAZIONE, LocalDate.now().getYear());
+  	    anno = InputDati.leggiIntero(Costanti.INS_ANNO_RICHIESTO, Costanti.ANNO_MINIMO_INTERROGAZIONE, Data.getNumeroAnniDataAttuale());
   	    
   	    switch(numScelta)
   	    {
