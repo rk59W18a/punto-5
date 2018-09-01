@@ -218,17 +218,19 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
      {
     	 System.out.println(op.visualizzaArchivio(getArchivio()));
      }
+     */
     
      public String sceltaInterrogazione(Operatore o)
      {
-  	    int numScelta = InputDati.leggiIntero(Costanti.SCELTA_INTERROGAZIONE, Costanti.NUM_MINIMO, Costanti.NUM_MASSIMO_SCELTA_INTERROGAZIONE);
-  	    int anno = 0;
-  	    Fruitore f = null;
-  	    String s1 = "";
-  	    String s2 = "";
+  	    //int numScelta = InputDati.leggiIntero(Costanti.SCELTA_INTERROGAZIONE, Costanti.NUM_MINIMO, Costanti.NUM_MASSIMO_SCELTA_INTERROGAZIONE);
+  	    //int anno = 0;
+  	    //Fruitore f = null;
+  	    //String s1 = "";
+  	    //String s2 = "";
   	    
   	    anno = InputDati.leggiIntero(Costanti.INS_ANNO_RICHIESTO, Costanti.ANNO_MINIMO_INTERROGAZIONE, LocalDate.now().getYear());
   	    
+  	    /*
   	    switch(numScelta)
   	    {
   	       case 1: s2 = Costanti.NUM_PRESTITI_PER_ANNO + o.numeroPrestitiPerAnno(getArchivioStorico(), anno);
@@ -263,6 +265,7 @@ public class ProcessOperatoreHandler extends ProcessHandler implements Serializa
   	    }  
   	    
   	    return s2;
+  	    */
      } 
-     */  
+       
 }
