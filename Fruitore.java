@@ -52,7 +52,7 @@ public class Fruitore extends Utente implements Serializable
     {
     	 if(Data.verificaDataPrecedente(dataDiScadenza))
 		 {
-			  LocalDate ld = dataDiScadenza.minusDays(DIECI_GIORNI);
+			  LocalDate ld = Data.diminuisciNumeroGiorni(dataDiScadenza, DIECI_GIORNI);
 				
 			  if((Data.verificaDataCoincidente(ld)) || (Data.verificaDataSuccessiva(ld))) 
 			  {

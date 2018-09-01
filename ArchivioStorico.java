@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import dominio.parte2.punto5.*;
 import utility.parte2.Costanti;
+import utility.parte2.Data;
 
 public class ArchivioStorico implements Serializable
 {
@@ -69,7 +70,7 @@ public class ArchivioStorico implements Serializable
     	   {
     		   Prestito p = prestitiStorici.getElencoPrestiti().get(i);
     		   
-    		   if(p.getDataDiInizioPrestito().getYear() == a)
+    		   if(Data.getNumeroAnniData(p.getDataDiInizioPrestito()) == a)
     			    num++;
     	   }
     	   
@@ -86,7 +87,7 @@ public class ArchivioStorico implements Serializable
     		   
     		   if(!(p.getProrogaNonEffettuata()))
     		   {
-    			   if(p.getDataProrogaEffettuata().getYear() == a)
+    			   if(Data.getNumeroAnniData(p.getDataProrogaEffettuata()) == a)
     				     num++;	   
     		   }
     	   }
@@ -104,7 +105,7 @@ public class ArchivioStorico implements Serializable
 		{
 			Prestito p = prestitiStorici.getElencoPrestiti().get(i);
 			
-			if(p.getDataDiInizioPrestito().getYear() == a)
+			if(Data.getNumeroAnniData(p.getDataDiInizioPrestito()) == a)
 			{
 				elencoPrestiti.add(p);
 			}
@@ -150,7 +151,7 @@ public class ArchivioStorico implements Serializable
 	    	{
 	    		 Prestito p = prestitiStorici.getElencoPrestiti().get(i);
 	    		   
-	    		 if((p.getFruitoreAssociato().equals(f)) && p.getDataDiInizioPrestito().getYear() == a)
+	    		 if((p.getFruitoreAssociato().equals(f)) && Data.getNumeroAnniData(p.getDataDiInizioPrestito()) == a)
 	    		       num++;
 	    	}
 	    	   
