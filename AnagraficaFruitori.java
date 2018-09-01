@@ -2,7 +2,6 @@ package logica.parte2.punto5;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import utility.parte2.Data;
 
 public class AnagraficaFruitori extends Anagrafica implements Serializable
@@ -68,10 +67,10 @@ public class AnagraficaFruitori extends Anagrafica implements Serializable
    	 		Fruitore f = (Fruitore) getElenco().get(i);	
    	 		
    	 	    if((Data.verificaDataCoincidente(f.getDataDiScadenza())) || Data.verificaDataSuccessiva(f.getDataDiScadenza()))
-   	 	    {
-   	 	    	getElenco().remove(f);
-   	 	      	as.getDecadenzeFruitoriStoriche().aggiungiFruitore(f);
-   	 	    }
+	 	    {
+	 	    	getElenco().remove(f);
+	 	      	as.getDecadenzeFruitoriStoriche().aggiungiFruitore(f);
+	 	    }
    	 	}
     }
        

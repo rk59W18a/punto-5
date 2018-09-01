@@ -21,7 +21,7 @@ public class Prestito implements Serializable
 	
 	public Prestito(Categoria c, Fruitore f, Risorsa r)
 	{
-		this.dataDiInizioPrestito = LocalDate.now();
+		this.dataDiInizioPrestito = Data.getDataAttuale();
 		this.categoriaAssociata = c;
 		this.dataDiScadenzaPrestito = Data.aumentaNumeroGiorni(dataDiInizioPrestito, categoriaAssociata.getNumeroMaxGiorniPrestito());
 		this.fruitoreAssociato = f;
@@ -97,13 +97,12 @@ public class Prestito implements Serializable
     public String toString()
     {
         StringBuffer ris = new StringBuffer();
-  	
+	   
 	    String perProroga = "no";
   	    if(!prorogaNonEffettuata)
   		      perProroga = "si";
   	
   	    ris.append(String.format(DESCRIZIONE_PRESTITO, categoriaAssociata.getNome(), risorsaInPrestito.toString(), Data.getDataFormattata(dataDiInizioPrestito), Data.getDataFormattata(dataDiScadenzaPrestito), perProroga));
-        return ris.toString();
-
+  	    return ris.toString();
     }   
 }

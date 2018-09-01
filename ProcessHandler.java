@@ -13,8 +13,10 @@ import dominio.parte2.punto5.RicercaPerTitoloStrategy;
 import dominio.parte2.punto5.Risorsa;
 import dominio.parte2.punto5.SottoCategoria;
 import dominio.parte2.punto5.Contenitore;
+import logica.parte2.punto5.AnagraficaFruitori;
 import logica.parte2.punto5.Archivio;
 import logica.parte2.punto5.ArchivioPrestiti;
+import logica.parte2.punto5.ArchivioStorico;
 import logica.parte2.punto5.Utente;
 import utility.parte2.Costanti;
 import utility.parte2.InputDati;
@@ -25,11 +27,15 @@ public abstract class ProcessHandler implements Serializable
 	
 	private Archivio arc;
     private ArchivioPrestiti ap;
-   
+    private AnagraficaFruitori af;
+    private ArchivioStorico as;
+    
     public ProcessHandler(RaccoltaDati rd)
     {  
     	this.arc = rd.getArchivio();
     	this.ap = rd.getArchivioPrestiti();
+    	this.af = rd.getAnagraficaFruitori();
+    	this.as = rd.getArchivioStorico();
     }
     
     public Archivio getArchivio()
@@ -41,14 +47,24 @@ public abstract class ProcessHandler implements Serializable
     {
     	return ap;
     }
-
+    
+    public AnagraficaFruitori getAnagraficaFruitori()
+    {
+    	return af;
+    }
+    
+    public ArchivioStorico getArchivioStorico()
+    {
+    	return as;
+    }
+    
     public abstract Utente accesso();
   
     public ArrayList <Risorsa> ricercaRisorsa(Utente ut)
     {
        	Categoria c = null;
        	
-   	 	System.out.printf(Costanti.CONTENUTO_ARC, arc.stampaElencoCategorie());
+   	 	System.out.printf(Costanti.CONTENUTO_ARC, stampaElencoCategorie());
    	 	
    	    int num1 = InputDati.leggiIntero(Costanti.INS_NUMERO_CAT_RICERCA, Costanti.NUM_MINIMO, (arc.getElencoCategorie()).size());
    	    c = (arc.getElencoCategorie()).get(num1-Costanti.NUM_MINIMO);
@@ -184,6 +200,19 @@ public abstract class ProcessHandler implements Serializable
  	   
  	   return ris.toString();
    }
+   
+   public String stampaElencoCategorie()
+	{
+		StringBuffer ris = new StringBuffer();
+		   
+		for(int i = 0; i < arc.getElencoCategorie().size(); i++)
+		{
+			   Categoria c = arc.getElencoCategorie().get(i);
+			   ris.append(i+1 + ")" + c.getNome() + "\n");
+		}
+		   
+	    return ris.toString();
+	}
   
    public String stampaElencoSottocategorie(Categoria c)
    {

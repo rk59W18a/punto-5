@@ -14,7 +14,7 @@ public class Libro extends Risorsa implements Serializable
     
     public Libro(String titolo, int licenze, String genere, int annoPub, String lingua, ArrayList <Persona> a, int np, String ce)
     {
-    	 super(titolo, licenze, a,genere, annoPub, lingua);
+    	 super(titolo, licenze, a, genere, annoPub, lingua);
     	 this.numPagine = np;
     	 this.casaEditrice = ce;
     }

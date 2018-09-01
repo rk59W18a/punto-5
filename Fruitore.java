@@ -1,9 +1,9 @@
 package logica.parte2.punto5;
 
 import java.io.Serializable;
+
 import java.time.*;
 import java.util.ArrayList;
-
 import utility.parte2.Data;
 
 public class Fruitore extends Utente implements Serializable
@@ -50,7 +50,7 @@ public class Fruitore extends Utente implements Serializable
     
     public boolean rinnovaIscrizione()
     {
-		 if((LocalDate.now().isBefore(dataDiScadenza)))
+    	 if(Data.verificaDataPrecedente(dataDiScadenza))
 		 {
 			  LocalDate ld = dataDiScadenza.minusDays(DIECI_GIORNI);
 				
@@ -98,7 +98,7 @@ public class Fruitore extends Utente implements Serializable
     public String toString()
     {
       	StringBuffer ris = new StringBuffer();
-    	    
+          
       	ris.append(String.format(DESCRIZIONE_FRUITORE, getNome(), getCognome(), getUsername(), getPassword(), Data.getDataFormattata(dataDiNascita), Data.getDataFormattata(dataDiIscrizione), Data.getDataFormattata(dataDiScadenza)));
         return ris.toString();
     }   
